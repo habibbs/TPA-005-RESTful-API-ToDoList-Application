@@ -7,7 +7,7 @@ const todoSchema = mongoose.Schema({
         default: false,
     },
 });
-
 const todos = mongoose.model('todo', todoSchema);
+
 
 module.exports = todos;
