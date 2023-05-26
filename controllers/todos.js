@@ -1,4 +1,6 @@
 const todos = require('../models/todos');
+const dUser = require('../models/users');
+const bcryptjs = require('bcryptjs');
 
 //  menampilkan semua data
 module.exports.getAllTodos = (req, res) => {
@@ -89,3 +91,20 @@ module.exports.deleteAllTodo = (req, res) => {
         })
     })
 };
+
+
+module.exports.daftarUser = async (req, res) => {
+    const body = req.body;
+
+    const hashing = await bcryptjs.hash(body.password, 10)
+    const user = new dUser ({
+        username: body.username,
+        email: body.email,
+        password: hashing,
+    })
+    user.save().then(() => {
+        res.status(200).json({
+            message: 'User berhasil didaftarkan',
+        });
+    });
+}
