@@ -28,3 +28,14 @@ module.exports.getTodoById = (req, res) => {
         });
     });
 };
+
+module.exports.addTodo = (req, res) => {
+    const body = req.body;
+    const todo = new todos({ name: body.name });
+
+    todo.save().then(() => {
+        res.json({
+            message: 'Data berhasil disimpan',
+        });
+    });
+};
