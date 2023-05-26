@@ -20,6 +20,10 @@ app.use(
     })
 );
 
+app.get('/', (req, res) => {
+    res.send('HABIB SYAWALI');
+});
+
 app.use('/api', require('./routes/api'));
 
 app.listen(port, () => {
