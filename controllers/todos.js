@@ -3,7 +3,6 @@ const todos = require('../models/todos');
 module.exports.getAllTodos = (req, res) => {
     todos.find().then((result, err) => {
         if (err) {
-            console.log(err);
             res.json({
                 message: 'ERROR 401',
             });
@@ -16,8 +15,8 @@ module.exports.getAllTodos = (req, res) => {
 };
 
 module.exports.getTodoById = (req, res) => {
-    const id = req.params.id;
-    todos.findById(id, (result, err) => {
+    const idTodo = req.params.id;
+    todos.findById(idTodo).then((result, err) => {
         if (err) {
             res.json({
                 message: 'Error menehh wes angel',
@@ -43,14 +42,14 @@ module.exports.addTodo = (req, res) => {
 
 module.exports.deleteTodoById = (req, res) => {
     const id = req.params.id;
-    todos.findByIdAndDelete(id, (err, doc) => {
+    todos.findByIdAndDelete(id).then((result, err) => {
         if (err) {
             res.json({
                 message: 'gagal menghapus todo',
                 error: err,
             });
         }
-        res.json({
+        res.status(200).json({
             message: `sukses menghapus todo dengan id : ${id}`,
         });
     });

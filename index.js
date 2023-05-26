@@ -13,6 +13,7 @@ mongoose.connect('mongodb+srv://habib:syawalihabib23@cluster1.oiim0oh.mongodb.ne
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+
 app.use(
     bodyParser.urlencoded({
         extended: true,
