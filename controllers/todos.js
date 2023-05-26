@@ -54,3 +54,19 @@ module.exports.deleteTodoById = (req, res) => {
         });
     });
 };
+
+module.exports.updateTodoById = (req, res) => {
+    const id = req.params.id;
+    const todoLoad = req.body;
+
+    todos.findByIdAndUpdate(id, todoLoad).then((result, err) => {
+        if (err) {
+            res.json({
+                message: `Gagal mengubah data`,
+            });
+        }
+        res.status(200).json({
+            message: `Berhasil mengubah data dengan id : ${id}`,
+        });
+    });
+};
