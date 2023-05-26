@@ -39,3 +39,18 @@ module.exports.addTodo = (req, res) => {
         });
     });
 };
+
+module.exports.deleteTodoById = (req, res) => {
+    const id = req.params.id;
+    todos.findByIdAndDelete(id, (err, data) => {
+        if (err) {
+            res.json({
+                message: 'gagal menghapus todo',
+                error: err,
+            });
+        }
+        res.json({
+            message: `sukses menghapus todo dengan id : ${id}`,
+        });
+    });
+};
