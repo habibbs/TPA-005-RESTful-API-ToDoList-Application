@@ -1,7 +1,9 @@
+const dotenv = require('dotenv');
 const todos = require('../models/todos');
 const dUser = require('../models/users');
 const bcryptjs = require('bcryptjs');
-
+const jsonwebtoken = require('jsonwebtoken');
+dotenv.config();
 //  menampilkan semua data
 module.exports.getAllTodos = (req, res) => {
     todos.find().then((result, err) => {
@@ -107,4 +109,28 @@ module.exports.daftarUser = async (req, res) => {
             message: 'User berhasil didaftarkan',
         });
     });
+}
+
+module.exports.loginUser = async (req, res) => {
+    const { username, password } = req.body;
+    const dataUser = await dUser.findOne({$or: [{username: username}, {email: username}]})
+
+    if(dataUser) {
+        const passwordUser = await bcryptjs.compare(password, dataUser.password)
+        
+        if(passwordUser) {
+            const data = {
+                id: dataUser._id,
+            }
+            const token = await jsonwebtoken.sign(data, process.env.JWT_SECRET)
+            res.status(200).json({
+                message: 'Berhasil login',
+                token: token,
+            })
+        }
+    } else {
+        return res.status(404).json({
+            message: 'Login Gagal'
+        })
+    }
 }

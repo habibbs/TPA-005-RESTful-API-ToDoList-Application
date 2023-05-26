@@ -10,5 +10,6 @@ router.put('/:id', todosController.updateTodoById);
 router.delete('/', todosController.deleteAllTodo);
 
 router.post('/daftar', todosController.daftarUser);
+router.post('/login', todosController.loginUser);
 
 module.exports = router;
