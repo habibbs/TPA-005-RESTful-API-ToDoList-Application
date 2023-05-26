@@ -75,3 +75,17 @@ module.exports.updateTodoById = (req, res) => {
         });
     });
 };
+
+//  menghapus seluruh data
+module.exports.deleteAllTodo = (req, res) => {
+    todos.deleteMany().then((result, err) => {
+        if(err) {
+            res.status(400).json({
+                message: 'gagal menghapus semua todo',
+            })
+        }
+        res.status(200).json({
+            message: 'Semua data berhasil dihapus',
+        })
+    })
+};
