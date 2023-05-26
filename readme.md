@@ -48,3 +48,8 @@
     Endpoint : api/todos/daftar
     example cURL : localhost:3000/api/todos/daftar
 
+#### 6. Login User
+    Method : POST
+    Endpoint : api/todos/login
+    example cURL : localhost:3000/api/todos/login
+
